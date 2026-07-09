@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from.models import Service,Appointment,EmployeeFreeSlot
+from.models import Service,Appointment,EmployeeFreeSlot,ClientDetails
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,6 +15,11 @@ class ApointmentSerializer(serializers.ModelSerializer):
 class EmployeeFreeSlotSerializer(serializers.ModelSerializer):
     class Meta:
         model=EmployeeFreeSlot
-        fields=["free-day","free_time"]
+        fields=["free_day","free_time"]
+
+class ClientDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ClientDetails
+        fields=["client_name","client_email","client_contact","client_password"]
 
 

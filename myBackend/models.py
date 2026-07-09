@@ -6,7 +6,7 @@ class Service(models.Model):
     service_price=models.IntegerField()
 
 class ClientDetails(models.Model):
-    client_email=models.CharField(max_length=150)
+    client_email=models.EmailField(max_length=150,unique=True)
     client_name=models.CharField(max_length=100,blank=False)
     client_contact=models.IntegerField(blank=False)
     #learn more on how to enforce length restrictions for a phone number using regex validator
