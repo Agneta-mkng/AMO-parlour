@@ -1,9 +1,10 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,throttle_classes
 from rest_framework.response import Response
 from .serializer import ServiceSerializer,EmployeeFreeSlotSerializer,ApointmentSerializer,ClientDetailsSerializer
 from .models import EmployeeFreeSlot,Service,Appointment,ClientDetails
 from rest_framework import status
 from django.contrib.auth.hashers import make_password,check_password
+from rest_framework.throttling import ScopedRateThrottle
 
 
 #A view to display the services offered by the parlour.
@@ -84,7 +85,9 @@ def signup(request):
 
 #A view for user login
 @api_view(['POST'])
+@throttle_classes([ScopedRateThrottle])
 def login(request):
+    login.throttle_scope='login'
     client_email=request.data.get("client_email","")
     client_password=request.data.get("client_password","")
     try:

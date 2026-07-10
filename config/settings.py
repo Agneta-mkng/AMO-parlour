@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,11 +78,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'amo_parlour_db',
-        'USER':'postgres',
-        'PASSWORD':'agneta@333',
-        'HOST':'127.0.0.1',
-        'PORT':'5432',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER':os.environ.get('DB_USER'),
+        'PASSWORD':os.environ.get('DB_PASSWORD'),
+        'PORT': os.environ.get('DB_PORT'),
+
+    }
+}
+
+
+REST_FRAMEWORK={
+    'DEFAULT_THROTTLE_CLASSES':[
+        'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES_':{
+        'login':'3/min',
     }
 }
 
