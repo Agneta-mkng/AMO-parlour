@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinLengthValidator
+
 
 class Service(models.Model):
     service_name=models.CharField(max_length=100)
@@ -10,7 +10,7 @@ class ClientDetails(models.Model):
     client_name=models.CharField(max_length=100,blank=False)
     client_contact=models.IntegerField(blank=False)
     #learn more on how to enforce length restrictions for a phone number using regex validator
-    client_password=models.CharField(max_length=50,validators=[MinLengthValidator(12,"Password length should be at least 12 ccharacters")])
+    client_password=models.CharField(max_length=150)
 
 class Appointment(models.Model):
     appointment_id=models.AutoField(primary_key=True,blank=False)

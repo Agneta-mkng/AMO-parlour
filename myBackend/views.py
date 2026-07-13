@@ -61,27 +61,40 @@ def appointmentPage(request):
     # A view for user signup
 @api_view(['POST'])
 def signup(request):
-        client_email=request.data.get("client_email","")
-        client_name=request.data.get("client_name","")
-        client_contact=request.data.get("client_contact","")
-        client_password=request.data.get("client_password","")
+    client_email = request.data.get("client_email", "")
+    client_name = request.data.get("client_name", "")
+    client_contact = request.data.get("client_contact", "")
+    client_password = request.data.get("client_password", "")
 
-        #One email cannot be used to create multiple accounts.
-        if ClientDetails.objects.filter(client_email=client_email).exists():
-            return Response({
-                "error":"This profile exists!Use a different email to create a new profile."
-          },status=status.HTTP_400_BAD_REQUEST)
+    # One email cannot be used to create multiple accounts.
+    if ClientDetails.objects.filter(client_email=client_email).exists():
+        return Response(
+            {"error": "Kindly use another email address to sign up"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
-        hashed_password=make_password(client_password)
-        new_user=ClientDetails(
-                client_email=client_email,
-                client_name=client_name,
-                client_contact=client_contact,
-                client_password=hashed_password
-            )
+    if len(client_password) >= 12:
+        hashed_password = make_password(client_password)
+
+        new_user = ClientDetails(
+            client_email=client_email,
+            client_name=client_name,
+            client_contact=client_contact,
+            client_password=hashed_password
+        )
+
         new_user.save()
-        return Response( {"message":"User profile created successfully"},status=status.HTTP_201_CREATED)
 
+        return Response(
+            {"message": "User profile created successfully"},
+            status=status.HTTP_201_CREATED
+        )
+
+    else:
+        return Response(
+            {"message": "Password must be at least 12 characters"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
 #A view for user login
 @api_view(['POST'])
@@ -94,11 +107,11 @@ def login(request):
         user=ClientDetails.objects.get(client_email=client_email)
 
         if check_password(client_password,user.client_password):
-            return Response({"Message":"Successful login!"},status=status.HTTP_200_OK)
+            return Response({"message":"Successful login!"},status=status.HTTP_200_OK)
         else:
-            return Response({"message":"Invalid login details!"},status=status.HTTP_404_NOT_FOUND)
+            return Response({"message":"Invalid login details!"},status=status.HTTP_401_UNAUTHORIZED)
     except ClientDetails.DoesNotExist:
-        return Response({"message":"Invalid login details!"},status=status.HTTP_404_NOT_FOUND)
+        return Response({"message":"Invalid login details!"},status=status.HTTP_401_UNAUTHORIZED)
     #For security reasons display invalid log in details so that a malicious person does not get to know of emails not found in the system.
 
     
