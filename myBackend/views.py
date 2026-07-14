@@ -111,7 +111,7 @@ def login(request):
         else:
             return Response({"message":"Invalid login details!"},status=status.HTTP_401_UNAUTHORIZED)
     except ClientDetails.DoesNotExist:
-        return Response({"message":"Invalid login details!"},status=status.HTTP_401_UNAUTHORIZED)
+        return Response({"message":"Invalid login detail!"},status=status.HTTP_401_UNAUTHORIZED)
     #For security reasons display invalid log in details so that a malicious person does not get to know of emails not found in the system.
 
     

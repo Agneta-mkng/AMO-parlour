@@ -46,3 +46,41 @@ v-model="client_password" type="password" placeholder="Password"
 <p>{{message}}</p>
 </div>
 </template>
+
+<style>
+.signup {
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 350px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color:4B2E4F;
+}
+
+input {
+padding: 12px;
+font-size: 1rem;
+color:4A4A4A;
+border:1px solid #D8C3D5;
+border-color:#B76E79;
+box-shadow:0 0 8px rgba(183,110,121,.25);
+}
+
+button{
+background-color:#B76E79;
+color:#FFFFFF;
+padding: 20px 20px;
+font-size:1.5rem;
+}
+
+button:hover{
+background-color:9F5A65;
+}
+</style>
