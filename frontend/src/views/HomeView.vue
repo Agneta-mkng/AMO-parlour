@@ -1,10 +1,7 @@
 <template>
   <section class="servicesProvided">
-    <button @click="toggleServices" class="services-btn">
-      {{ showServices ? "Hide Services" : "Our Services" }}
-    </button>
 
-    <div v-if="showServices" class="services">
+    <div class="services">
       <div
         class="service-card"
         v-for="service in services"
@@ -19,48 +16,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 import axios from "axios";
 
 const services = ref([]);
-const showServices = ref(false);
-const loaded = ref(false);
 
-const toggleServices = async () => {
-  showServices.value = !showServices.value;
-
-  // Fetch services only the first time they're shown. This prevents making requests to load the services everytime the user tries showing the services.
-  if (showServices.value && !loaded.value) {
+const loadServices = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/services/");
       services.value = response.data;
-      loaded.value = true;
     } catch (error) {
       console.error("Failed to load services:", error);
-    }
   }
 };
+onMounted(() =>{
+loadServices();
+});
 </script>
 
 <style scoped>
 .servicesProvided {
   padding: 30px;
   text-align: center;
-}
-
-.services-btn {
-  background-color: #4b2e4f;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.services-btn:hover {
-  background-color: #b76e79;
 }
 
 .services {
