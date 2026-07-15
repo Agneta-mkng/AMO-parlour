@@ -1,15 +1,15 @@
 from django.db import models
 
 
-class Service(models.Model):
+class Services(models.Model):
     service_name=models.CharField(max_length=100)
     service_price=models.IntegerField()
+    service_des=models.CharField(max_length=200)
 
 class ClientDetails(models.Model):
     client_email=models.EmailField(max_length=150,unique=True)
     client_name=models.CharField(max_length=100,blank=False)
     client_contact=models.IntegerField(blank=False)
-    #learn more on how to enforce length restrictions for a phone number using regex validator
     client_password=models.CharField(max_length=150)
 
 class Appointment(models.Model):
@@ -17,7 +17,7 @@ class Appointment(models.Model):
     appointment_date=models.DateField()
     client_email=models.ForeignKey(ClientDetails,on_delete=models.PROTECT)
     appointment_time=models.DateTimeField()
-    service=models.ForeignKey(Service,on_delete=models.PROTECT)
+    service=models.ForeignKey(Services,on_delete=models.PROTECT)
 
 class Employee(models.Model):
     emp_id=models.CharField(max_length=50)

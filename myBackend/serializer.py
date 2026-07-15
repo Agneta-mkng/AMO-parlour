@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from.models import Service,Appointment,EmployeeFreeSlot,ClientDetails
+from.models import Services,Appointment,EmployeeFreeSlot,ClientDetails
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Service
-        fields=["service_name","service_price"]
+        model=Services
+        fields=["service_name","service_price","service_des"]
 
 class ApointmentSerializer(serializers.ModelSerializer):
     class Meta:

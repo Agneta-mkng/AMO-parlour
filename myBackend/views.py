@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view,throttle_classes
 from rest_framework.response import Response
 from .serializer import ServiceSerializer,EmployeeFreeSlotSerializer,ApointmentSerializer,ClientDetailsSerializer
-from .models import EmployeeFreeSlot,Service,Appointment,ClientDetails
+from .models import EmployeeFreeSlot,Services,Appointment,ClientDetails
 from rest_framework import status
 from django.contrib.auth.hashers import make_password,check_password
 from rest_framework.throttling import ScopedRateThrottle
@@ -10,12 +10,9 @@ from rest_framework.throttling import ScopedRateThrottle
 #A view to display the services offered by the parlour.
 @api_view(['GET'])
 def services(request):
-   all_ser=services.objects.all() 
-   context={
-       "message":"These are the services offered by AMO parlour",
-       "Services":all_ser
-   }
-   return(Response,context)
+   all_ser=Services.objects.all() 
+   serializer=ServiceSerializer(all_ser,many=True)
+   return Response(serializer.data)
 
 
 #A view to display free appointment slots
