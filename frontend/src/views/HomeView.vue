@@ -1,5 +1,3 @@
-
-
 <template>
   <main>
     <h1>AMO parlour</h1>
