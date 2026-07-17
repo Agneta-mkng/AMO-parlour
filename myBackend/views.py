@@ -16,14 +16,22 @@ def services(request):
 
 
 #A view to display free appointment slots
-@api_view(['GET'])
+@api_view(['POST'])
 def displayFreeSlots(request):
-    free_slots=EmployeeFreeSlot.objects.all()
+    appointment_date=request.data.get("appointment_date")
+
+    if not appointment_date:
+        return Response({"error":"Date is required"},status=status.HTTP_400_BAD_REQUEST)
+    
+    free_slots=EmployeeFreeSlot.objects.filter(free_day=appointment_date)
     serializer=EmployeeFreeSlotSerializer(free_slots,many=True)
+
+    #Transformig the serializer data into to a simple list of strings for vue select down menu.
+    available_times=[free_slots['free_time'] for slot in serializer.data if 'free_time' in slot]
 
     data={
         "message":"These are the free slots that you can schedule your appointment",
-        "Slots are":serializer.data
+        "Slots are":available_times
     }
     return Response(data)
 
@@ -34,14 +42,14 @@ def appointmentPage(request):
         client_email=request.data.get("client_email","")
         appointment_date=request.data.get("appointment_date","")
         appointment_time=request.data.get("appointment_time","")
-        service=request.data.get("service","")
+        service_name=request.data.get("service","")
 
         #Save the data that you get from the user into your database
         new_appointment=Appointment(
             client_email=client_email,
             appointment_date=appointment_date,
             appointment_time=appointment_time,
-            service=service
+            service_name=service_name,
         )
         new_appointment.save()
         taken_slot=EmployeeFreeSlot.objects.filter(free_day=appointment_date,free_time=appointment_time)

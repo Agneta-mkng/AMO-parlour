@@ -7,5 +7,5 @@ urlpatterns=[
     path("appointment/",views.appointmentPage,name="appointment"),
     path("signup/",views.signup,name="signup-page"),
     path("login/",views.login,name="login"),
-    path("appointment_slot/",views.displayFreeSlots,name="Free_slots"),
+    path("appointment-slot/",views.displayFreeSlots,name="Free slots"),
 ]

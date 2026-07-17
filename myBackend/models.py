@@ -3,8 +3,8 @@ from django.db import models
 
 class Services(models.Model):
     service_name=models.CharField(max_length=100)
-    service_price=models.IntegerField()
-    service_des=models.CharField(max_length=200)
+    service_price=models.CharField(max_length=100)
+    service_des=models.CharField(max_length=600)
 
 class ClientDetails(models.Model):
     client_email=models.EmailField(max_length=150,unique=True)

@@ -12,6 +12,7 @@
         <h4>Ksh {{ service.service_price }}</h4>
       </div>
     </div>
+    
   </section>
 </template>
 
@@ -66,5 +67,8 @@ loadServices();
 
 .service-card h4 {
   color: #b76e79;
+}
+.service-card:hover{
+color:#b76e79;
 }
 </style>

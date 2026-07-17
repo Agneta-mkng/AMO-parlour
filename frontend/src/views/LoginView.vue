@@ -16,7 +16,7 @@ const message=ref("");
  }
 
  catch(error){
- message.value=error.response?.data?.message || "Login failed!";
+ message.value=error.response?.data?.message || "Login failed!#b76e79;";
  }};
 </script>
 

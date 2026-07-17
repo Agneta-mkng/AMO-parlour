@@ -9,7 +9,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 class ApointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model=Appointment
-        fields=["appointment_date","client_email","appointment_time","service"]
+        fields=["appointment_date","client_email","appointment_time","service-name"]
         #This will be used to get data from the user
 
 class EmployeeFreeSlotSerializer(serializers.ModelSerializer):
