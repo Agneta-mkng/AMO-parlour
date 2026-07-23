@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import api from "@/services/api";
@@ -112,17 +111,22 @@ async function bookAppointment() {
 
 <style scoped>
 .booking-container {
-  max-width: 450px;
-  margin: 0 auto;
-  padding: 30px;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 35px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(200,162,200,.35);
+  box-shadow: 0 15px 35px rgba(75, 46, 79, 18);
 }
 
 h2 {
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: #4B2E4F;
+  font-size: 2rem;
+  margin-bottom:25px;
+  font-family:"Playfair Display",serrif;
   text-align: center;
 }
 
@@ -135,44 +139,52 @@ h2 {
 label {
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 6px;
-  color: #555;
+  margin-bottom: 8px;
+  color: #4B2E4F;
 }
 
 input, select {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 12px 15px;
+  border: 1px solid #D8C3D5;
+  border-radius: 12px;
+  background:#FFF8FC;
+  color:#4A4A4A;
   font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s;
+  transition: .3s;
 }
 
 input:focus, select:focus {
-  border-color: #b5838d;
+  border-color: #B76E79;
+  outline:none;
+  box-shadow:0 0 10px rgba(183,110,121,.25);
+
 }
 
 .loading-text, .no-slots {
   font-size: 0.9rem;
-  color: #888;
+  color: #8B5E83;
   font-style: italic;
+  margin-top:8px;
 }
 
 .submit-btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: #B76E79;
   color: #FFFFFF;
   border: none;
-  border-radius: 6px;
+  background:linear-gradient(135deg,#B76E79,#D48A9A);
+  border-radius: 30px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: .3s;
 }
 
 .submit-btn:hover:not(:disabled) {
-  background-color: 9F5A65;
+  background:linear-gradient(135deg,#9F5A65,#B76E79);
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(183,110,121,.35);
 }
 
 .submit-btn:disabled {
@@ -181,9 +193,9 @@ input:focus, select:focus {
 }
 
 .feedback-message {
-  margin-top: 15px;
+  margin-top: 20px;
   text-align: center;
-  font-weight: 500;
-  color: #b5838d;
+  font-weight: 600;
+  color: #B76E79;
 }
 </style>
