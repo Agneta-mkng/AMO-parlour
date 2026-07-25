@@ -41,7 +41,7 @@ interface Service{
 }
 
 const services = ref<Service[]>([]);
-const showServices=ref(false)
+const showServices=ref(true)
 const router= useRouter();
 
 const loadServices = async () => {

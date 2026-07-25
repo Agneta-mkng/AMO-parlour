@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import NavBar from './components/NavBar.vue' // Renamed from HelloWorld to NavBar
+import NavBar from './components/NavBar.vue' 
+import MyFooter from './components/MyFooter.vue'
 import { ref, onMounted } from 'vue'
 import api from './services/api'
 
@@ -27,7 +28,9 @@ onMounted(async () => {
     <main class="main-content">
       <RouterView />
     </main>
+    <MyFooter />
   </div>
+  
 </template>
 
 <style>
@@ -43,6 +46,8 @@ onMounted(async () => {
   color: #2c3e50;
   min-height: 100vh;
   background-color: #fafafa;
+  display:flex;
+  flex-direction:column;
 }
 
 .api-status {
@@ -55,6 +60,7 @@ onMounted(async () => {
 }
 
 .main-content {
+  flex:1;
   padding: 40px 8%;
 }
 </style>
